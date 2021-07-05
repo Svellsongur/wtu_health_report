@@ -1,0 +1,98 @@
+<view class="container">
+    <view class="main-content">
+        <view class="mc-jbxx-wrap">
+            <image class="mcj-sptb" src="/resources/wd_sptg@2x.png" wx:if="{{spzt=='审批通过'}}"></image>
+            <image class="mcj-sptb" src="/resources/wd_spjj@2x.png" wx:if="{{spzt=='审批被拒绝'}}"></image>
+            <view class="mcj-common">
+                <image binderror="" bindload="" class="mcj-tx" lazyLoad="false" mode="" src="{{user_info.avatarUrl?user_info.avatarUrl:'/resources/head-default@2x.png'}}"></image>
+                <view class="mcj-xmjg">
+                    <text class="mcj-xm">{{fqrxm}}</text>
+                    <text class="mcj-jg mcj-jg-sptg" wx:if="{{spzt=='审批通过'}}">审批通过</text>
+                    <text class="mcj-jg mcj-jg-spbjj" wx:elif="{{spzt=='审批被拒绝'}}">审批被拒绝</text>
+                    <text class="mcj-jg mcj-jg-spbjj" wx:elif="{{spzt=='审批已撤销'}}">审批已撤销</text>
+                    <text class="mcj-jg mcj-spz" wx:else>审批中</text>
+                </view>
+            </view>
+            <view class="mcj-xx">
+                <block wx:for="{{showMoreBtn?jbxx:jbxx_all}}" wx:key="key">
+                    <view class="mcj-xx-item" wx:if="{{item.title!=''}}">
+                        <text class="mcj-ms">{{item.title}}</text>
+                    </view>
+                    <view class="mcj-xx-item">
+                        <text class="mcj-ms">{{item.key}}：</text>
+                        <block wx:if="{{item.type!=='image'}}">{{item.value}}</block>
+                        <view class="image-container" wx:else>
+                            <view class="image-item" wx:for="{{item.value}}" wx:for-item="item_image" wx:key="*this">
+                                <image bindtap="previewImage" data-list="{{item.value}}" data-url="{{item_image}}" lazyLoad="{{true}}" mode="aspectFill" src="{{item_image}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view bindtap="funcShowMore" class="mcj-more" wx:if="{{jbxx_all.length>6}}">{{showMoreBtn?'查看更多':'收起更多'}}</view>
+        </view>
+        <view class="mc-splc-wrap" wx:if="{{splc.length>0}}">
+            <text class="mcs-title">审批流程</text>
+            <view class="mcs-splc">
+                <block wx:for="{{splc}}" wx:key="multi_names">
+                    <view class="mcs-splc-item {{item.approval_time?'success':''}}" wx:if="{{item.type==='发起申请'}}">
+                        <view class="mcs-icon">
+                            <image binderror="" bindload="" class="mcs-tx" lazyLoad="false" mode="" src="{{user_info.avatarUrl?user_info.avatarUrl:'/resources/head-default@2x.png'}}"></image>
+                            <view class="mcs-tx-icon">
+                                <mp-icon color="#00996c" icon="done2" size="16" type="field"></mp-icon>
+                            </view>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-bold">{{item.type}}</text>
+                            <text class="mcs-right">{{item.approval_time}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.name}}</text>
+                        </view>
+                    </view>
+                    <view class="mcs-splc-item {{item.approval_time?'success':''}}" wx:elif="{{item.type==='抄送人'}}">
+                        <view class="mcs-icon">
+                            <mp-icon color="#ffffff" icon="volume-up" size="18" type="field"></mp-icon>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-bold">{{item.type}}</text>
+                            <text class="mcs-right">{{item.approval_time}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.sum}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.name||item.multi_names}}</text>
+                        </view>
+                    </view>
+                    <view class="mcs-splc-item {{item.approval_time?'success':''}}" wx:else>
+                        <view class="mcs-icon">
+                            <text wx:if="{{item.icon}}">{{item.icon}}</text>
+                            <mp-icon color="#ffffff" icon="group-detail" size="18" type="field" wx:else></mp-icon>
+                            <view class="mcs-tx-icon">
+                                <mp-icon color="#00996c" icon="done2" size="16" type="field" wx:if="{{item.sftg==='同意'}}"></mp-icon>
+                                <mp-icon color="#EC4E4E" icon="close2" size="16" type="field" wx:elif="{{item.sftg==='拒绝'}}"></mp-icon>
+                                <mp-icon color="#EEAB32" icon="more2" size="16" type="field" wx:else></mp-icon>
+                            </view>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left mcs-bold">{{item.type}}</text>
+                            <text class="mcs-right">{{item.approval_time}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.name||item.multi_names}}{{item.sftg?'（'+item.sftg+'）':''}}</text>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="mc-spch-wrap" hidden="{{!can_cancel}}">
+            <button bindtap="funcRecallConfirm" class="btn-recall" hoverClass="btn-recall-hover" size="none" type="none">
+                <mp-icon color="#333" icon="previous" size="18" type="field"></mp-icon>撤回
+      </button>
+        </view>
+        <mp-dialog bindbuttontap="funcRecall" buttons="{{dialog_buttons}}" show="{{dialog_show}}" title="">
+            <view>你确定要撤销申请吗？</view>
+        </mp-dialog>
+    </view>
+</view>

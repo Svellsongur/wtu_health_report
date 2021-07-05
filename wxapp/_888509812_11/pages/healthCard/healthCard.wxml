@@ -1,0 +1,447 @@
+<import src="../../tabbar.wxml"></import>
+<view class="container" style="background-color:{{navbarData.bgcolor}};overflow:hidden;">
+    <navbar navbarData="{{navbarData}}"></navbar>
+    <view class="jkk-whzy">
+        <image bindtap="funcWhzy" class="jkk-whzy-img" data-miniprogram="武汉战役" src="/resources/icon-whzy.png"></image>
+    </view>
+    <view class="scroll-view" style="padding-top:{{statusBarHeight+44}}px">
+        <view class="jkk-top" style="background-color:{{navbarData.bgcolor}};padding-top:{{statusBarHeight/2}}px;height:calc(160rpx + {{statusBarHeight*3}}px);" wx:if="{{yhlx=='student'||yhlx=='teacher'||yhlx=='thirdparty'}}">
+            <view class="jkk-top-img" style="top:{{statusBarHeight/2}}px">
+                <image mode="widthFix" src="{{user_info.avatarUrl?user_info.avatarUrl:'/resources/jkk-'+yhlx+'.png'}}"></image>
+            </view>
+            <view class="jkk-top-item jkk-top-xm">{{base_info.xm}}<text class="jkk-top-befor">{{base_info.jkklx=='未返校'?'（未返校）':''}}</text>
+            </view>
+            <view class="jkk-top-item">{{base_info.yhm}}</view>
+            <view class="jkk-top-item" style="line-height:40rpx;">{{base_info.bmmc?base_info.bmmc:''}}{{base_info.yxmc?base_info.yxmc:''}}{{base_info.bjmc?'/'+base_info.bjmc:''}}</view>
+            <view class="jkk-top-item" wx:if="{{yhlx=='student'}}">{{base_info.ssmc}}</view>
+            <view class="jkk-top-img-bottom" style="top:{{statusBarHeight/2}}px">
+                <image src="/resources/jkk-bottom-img.png"></image>
+            </view>
+        </view>
+        <view class="jkk-top" style="background-color:{{navbarData.bgcolor}};padding-top:{{statusBarHeight/2}}px;height:calc(160rpx + {{statusBarHeight*3}}px);" wx:if="{{yhlx=='visitor'}}">
+            <view class="jkk-top-img" style="top:{{statusBarHeight/2}}px">
+                <image mode="widthFix" src="{{user_info.avatarUrl?user_info.avatarUrl:'/resources/jkk-'+yhlx+'.png'}}"></image>
+            </view>
+            <view class="jkk-top-item jkk-top-xm">{{base_info.xm}}</view>
+            <view class="jkk-top-item">{{base_info.yhm}}</view>
+            <view class="jkk-top-item">{{base_info.id_card}}</view>
+            <view class="jkk-top-img-bottom" style="top:{{statusBarHeight/2}}px">
+                <image src="/resources/jkk-bottom-img.png"></image>
+            </view>
+        </view>
+        <view class="content-box" style="position: relative;;height:calc(100% - 140rpx - {{statusBarHeight*3}}px);" wx:if="{{yhlx=='student'||yhlx=='teacher'||yhlx=='thirdparty'}}">
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='gray'&&base_info.jkklx=='未返校'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">00:00:00</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">畅行码初始化完成。</view>
+                        <view class="jkk-button">
+                            <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='green'&&base_info.jkklx=='未返校'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">绿码：可在校园内通行。</view>
+                        <view class="jkk-button">
+                            <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='gray'&&base_info.jkklx=='已返校'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">00:00:00</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">灰码：您的畅行码已过期，请及时健康打卡。</view>
+                        <view class="jkk-button">
+                            <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkklx=='已返校'&&base_info.jkmdqzt=='green'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">绿码：可在校园内通行。</view>
+                        <view class="jkk-button">
+                            <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkklx=='已返校'&&base_info.jkmdqzt=='yellow'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">黄码：测温异常，请尽快再次测温。</view>
+                        <view class="jkk-button">
+                            <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkklx=='已返校'&&base_info.jkmdqzt=='purple'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">紫码：健康异常，请等待校医院复检。</view>
+                        <view class="jkk-button">
+                            <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkklx=='已返校'&&base_info.jkmdqzt=='red'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                </view>
+                <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                    <view class="jkk-explain poR-30T" style="text-align:center;">红码：请积极配合治疗，祝早日康复！</view>
+                    <view class="jkk-button">
+                        <view bindtap="funcSys" class="{{base_info.jkklx=='已返校'?'':'jkk-button-disabled'}}">扫一扫</view>
+                        <view bindtap="funcJksb">健康打卡</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="content-box" style="position: relative;height:calc(100% - 160rpx - {{statusBarHeight*3}}px);" wx:if="{{yhlx=='visitor'}}">
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='gray'&&base_info.jkmyxsc=='-1'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:else>
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>禁止出入校园</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">00:00:00</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">畅行码初始化完成</view>
+                        <view class="jkk-button" wx:if="{{base_info.bs}}">
+                            <view bindtap="funcSys">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                        <view class="jkk-button" wx:else>
+                            <view bindtap="" style="color:#ccc">扫一扫</view>
+                            <view bindtap="" style="color:#ccc">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='yellow'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:else>
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>禁止出入校园</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">黄码：测温异常，请尽快再次测温。</view>
+                        <view class="jkk-button" wx:if="{{base_info.bs}}">
+                            <view bindtap="funcSys">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                        <view class="jkk-button" wx:else>
+                            <view bindtap="" style="color:#ccc">扫一扫</view>
+                            <view bindtap="" style="color:#ccc">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='purple'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:else>
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>禁止出入校园</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">紫码：健康异常，请等待校医院复检。</view>
+                        <view class="jkk-button" wx:if="{{base_info.bs}}">
+                            <view bindtap="funcSys">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                        <view class="jkk-button" wx:else>
+                            <view bindtap="" style="color:#ccc">扫一扫</view>
+                            <view bindtap="" style="color:#ccc">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='red'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:else>
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>禁止出入校园</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">红码：请积极配合治疗，祝早日康复！</view>
+                        <view class="jkk-button" wx:if="{{base_info.bs}}">
+                            <view bindtap="funcSys">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                        <view class="jkk-button" wx:else>
+                            <view bindtap="" style="color:#ccc">扫一扫</view>
+                            <view bindtap="" style="color:#ccc">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='green'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:else>
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>禁止出入校园</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">{{time}}</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">绿码：可在校园内通行。</view>
+                        <view class="jkk-button" wx:if="{{base_info.bs}}">
+                            <view bindtap="funcSys">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                        <view class="jkk-button" wx:else>
+                            <view bindtap="" style="color:#ccc">扫一扫</view>
+                            <view bindtap="" style="color:#ccc">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="jkk-content" wx:if="{{base_info.jkmdqzt=='gray'&&base_info.jkmyxsc=='0'}}">
+                <view class="jkk-yhlx jkk-yhlx-{{yhlx}}" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-qrCode">
+                    <view class="jkk-pass" wx:if="{{!base_info.bs&&base_info.jkmdqzt=='green'}}">
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>{{base_info.title}}</view>
+                        <view class="jkk-pass-box" style="color:#EC4E4E;" wx:else>
+                            <mp-icon class="jkk-icon" color="#EC4E4E" icon="close2" size="20"></mp-icon>禁止出入校园</view>
+                    </view>
+                    <view class="jkk-pass" wx:else>
+                        <view class="jkk-pass-box" wx:if="{{base_info.title}}">
+                            <mp-icon class="jkk-icon" color="#55AB6B" icon="done2" size="20"></mp-icon>{{base_info.title}}</view>
+                    </view>
+                    <view class="jkk-explain" style="text-align:center;">{{base_info.title?base_info.title_time:''}}</view>
+                    <view class="jkk-qrCode-wrap">
+                        <image class="jkk-image-qrCode" src="{{path}}"></image>
+                    </view>
+                    <view class="jkk-yxsc clearfix">
+                        <text>剩余有效时长：</text>
+                        <text class="jkk-yxsc-time">00:00:00</text>
+                    </view>
+                    <text class="jkk-gxsj">更新时间：{{base_info.jkmgxsj}}</text>
+                    <view class="jkk-bottom-box" style="margin-top:{{screenHeight>=700?statusBarHeight:'0'}}px;">
+                        <view class="jkk-explain poR-30T" style="text-align:center;">灰码：您的畅行码已过期，请及时健康打卡。</view>
+                        <view class="jkk-button" wx:if="{{base_info.bs}}">
+                            <view bindtap="funcSys">扫一扫</view>
+                            <view bindtap="funcJksb">健康打卡</view>
+                        </view>
+                        <view class="jkk-button" wx:else>
+                            <view bindtap="" style="color:#ccc">扫一扫</view>
+                            <view bindtap="" style="color:#ccc">健康打卡</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <mp-dialog bindbuttontap="tapDialogButton" buttons="{{oneButton}}" show="{{showOneButtonDialog}}" title="提示">
+        <view>正在开发中...</view>
+    </mp-dialog>
+</view>
+<template is="tabBar" data="{{tabBar:tabBar}}"></template>
+<wxs module="tools" src="../../utils/indexOf.wxs" />

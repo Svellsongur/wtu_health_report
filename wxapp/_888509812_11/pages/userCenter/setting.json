@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "mp-cells": "/components/weui/cells/cells",
+        "mp-cell": "/components/weui/cell/cell",
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-dialog": "/components/weui/dialog/dialog"
+    },
+    "navigationBarTitleText": "设置"
+}

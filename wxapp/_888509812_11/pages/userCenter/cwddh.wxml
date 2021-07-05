@@ -1,0 +1,9 @@
+<view class="map_container">
+    <map showLocation bindmarkertap="markertap" circles="{{circles}}" class="map" controls="{controls}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" scale="{{scale}}"></map>
+</view>
+<cover-view bindtap="funcHide" class="list-guide {{dhShow?'show':'hide'}}">
+    <cover-view bindtap="onGuideTap" class="list-guide-view" data-bankName="{{dh_name}}" data-latitude="{{dh_latitude}}" data-longitude="{{dh_longitude}}" hoverStopPropagation="true">
+        <cover-image class="list-guide-imgae" src="/resources/wd_wfqd@2x.png"></cover-image>
+        <cover-view class="list-guide-text">开始导航</cover-view>
+    </cover-view>
+</cover-view>

@@ -1,0 +1,133 @@
+<import src="../../tabbar.wxml"></import>
+<view class="container">
+    <navbar navbarData="{{navbarData}}"></navbar>
+    <cover-view class="title" style="margin-top:{{statusBarHeight+44}}px">
+        <block wx:if="{{hide}}" wx:for="{{titList}}" wx:key="*this">
+            <cover-view bindtap="handeRecord" class="title-item {{titIndex==index?'actived':''}}" data-index="{{index}}" wx:if="{{index==1}}">
+                <cover-view>{{item}}</cover-view>
+                <cover-view class="titBorder" wx:if="{{titIndex==index}}"></cover-view>
+            </cover-view>
+        </block>
+        <cover-view bindtap="handeRecord" class="title-item {{titIndex==index?'actived':''}} " data-index="{{index}}" wx:if="{{!hide}}" wx:for="{{titList}}" wx:key="*this">
+            <cover-view>{{item}}</cover-view>
+            <cover-view class="titBorder" wx:if="{{titIndex==index}}"></cover-view>
+        </cover-view>
+    </cover-view>
+    <view class="rdb-box rdb-tzgg" hidden="{{titIndex!=0}}">
+        <view class="main-content main-content-center" hidden="{{tzggTotal!='0'}}">
+            <cover-image class="no-record" src="/resources/guard-no-record@2x.png"></cover-image>
+            <view class="no-record-text">暂无相关记录</view>
+        </view>
+        <view class="tzgg-header" hidden="{{tzggTotal=='0'}}" style="margin-top:{{statusBarHeight+44}}px">
+            <view bindtap="funcTzggBj" class="rdb-tzgg-btn">
+                <image class="rdb-tzgg-btn-icon" src="/resources/icon-sign@2x.png"></image>
+                <text>全部标记已读</text>
+            </view>
+        </view>
+        <view class="tzgg-body" hidden="{{tzggTotal=='0'}}">
+            <view class="tzgg-list" wx:for="{{tzggList}}" wx:key="index">
+                <view bindtap="maskAsRead" data-id="{{item.id}}">
+                    <view class="tzgg-list-header">
+                        <view class="tzgg-list-icon" wx:if="{{item.read==0}}"></view>
+                        <view class="tzgg-list-title">
+								{{item.title}}
+							</view>
+                        <view class="tzgg-list-time">
+								{{item.recv_time}}
+							</view>
+                    </view>
+                    <view class="tzgg-list-body">
+							{{item.brief}}
+						</view>
+                </view>
+                <view bindtap="funcTzggDetail" class="tzgg-list-footer" data-id="{{item.id}}">
+                    <view>立即查看</view>
+                    <view>></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="rdb-box rdb-wdxx" hidden="{{titIndex!=1}}">
+        <view class="wdxx-header" style="margin-top:{{statusBarHeight+44}}px">
+            <view bindtap="funcWdxxBj" class="rdb-wdxx-btn" wx:if="{{wdxxTotal>0}}">
+                <image class="rdb-wdxx-btn-icon" src="/resources/icon-sign@2x.png"></image>
+                <text>全部标记已读</text>
+            </view>
+        </view>
+        <view class="main-content main-content-center" hidden="{{wdxxTotal!='0'}}">
+            <cover-image class="no-record" src="/resources/guard-no-record@2x.png"></cover-image>
+            <view class="no-record-text">暂无相关记录</view>
+        </view>
+        <view class="wdxx-body">
+            <view class="wdxx-list" wx:for="{{wdxxList}}" wx:key="index">
+                <view bindtap="wd_maskAsRead" data-id="{{item.id}}">
+                    <view class="wdxx-list-header">
+                        <view class="wdxx-list-icon" wx:if="{{item.read==0}}"></view>
+                        <view class="wdxx-list-title">
+								{{item.m_type}}
+							</view>
+                        <view class="wdxx-list-time">
+								{{item.recv_time}}
+							</view>
+                    </view>
+                    <view class="wdxx-list-body">
+                        <text>{{item.title}}</text>
+							{{item.content}}
+						</view>
+                </view>
+                <view bindtap="funcWdxxDetail" class="wdxx-list-footer" data-id="{{item.id}}" data-urls="{{item.app_jump_url}}" wx:if="{{item.app_jump_url!='-'}}">
+                    <view>立即查看</view>
+                    <view>></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="rdb-box rdb-sptz" hidden="{{titIndex!=2}}">
+        <view class="sptz-header" style="margin-top:{{statusBarHeight+44}}px">
+            <view bindtap="funcSptzBj" class="rdb-sptz-btn" hidden="{{sptzTotal=='0'}}">
+                <image class="rdb-sptz-btn-icon" src="/resources/icon-sign@2x.png"></image>
+                <text>筛选</text>
+            </view>
+        </view>
+        <view class="main-content main-content-center" hidden="{{sptzTotal!='0'}}">
+            <cover-image class="no-record" src="/resources/guard-no-record@2x.png"></cover-image>
+            <view class="no-record-text">暂无相关记录</view>
+        </view>
+        <view class="sptz-body">
+            <view class="sptz-list" wx:for="{{sptzList}}" wx:key="index">
+                <view class="sptz-list-header">
+                    <view class="sptz-list-title">
+							{{item.title}}
+						</view>
+                    <view class="sptz-list-time">
+							{{item.recv_time}}
+						</view>
+                </view>
+                <view class="sptz-list-body">
+                    <text wx:for="{{item.content}}" wx:for-index="_index" wx:for-item="_item" wx:key="_index">{{_item}}</text>
+                    <text class="sptz-list-type sptz-list-yty-type" wx:if="{{item.state=='同意'}}">{{item.state}}</text>
+                    <text class="sptz-list-type sptz-list-yjj-type" wx:if="{{item.state=='拒绝'}}">{{item.state}}</text>
+                </view>
+                <view bindtap="funcSptzDetail" class="wdxx-list-footer" data-id="{{item.brief}}" data-spzt="{{item.state}}">
+                    <view>详情</view>
+                    <view>></view>
+                </view>
+            </view>
+        </view>
+        <view class="sptg-dilog" style="margin-top:{{statusBarHeight+44}}px" wx:if="{{sxShow}}">
+            <view bindtap="funcHide" class="dilog-bg"></view>
+            <view class="dilog-body" hoverStopPropagation="true">
+                <view class="dilog-content">
+                    <view>状态</view>
+                    <text bindtap="funcSxBtb" class="{{sptzPrams.state==''?'actived':''}}" data-value="">全部</text>
+                    <text bindtap="funcSxBtb" class="{{item==sptzPrams.state?'actived':''}}" data-value="{{item}}" wx:for="{{sxBtbList}}" wx:key="index">{{item}}</text>
+                </view>
+                <view class="dilog-button">
+                    <view bindtap="funcCancel">取消</view>
+                    <view bindtap="funcConfirm">确定</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<template is="tabBar" data="{{tabBar:tabBar}}"></template>

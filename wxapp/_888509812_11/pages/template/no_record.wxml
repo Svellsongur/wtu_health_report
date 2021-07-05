@@ -1,0 +1,6 @@
+<template name="noRecord">
+    <view class="no-record">
+        <image class="no-record-image" src="/resources/guard-no-record@2x.png"></image>
+        <view class="no-record-text">{{noRecordText||'暂无相关记录'}}</view>
+    </view>
+</template>

@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-checkbox-group": "/components/weui/checkbox-group/checkbox-group",
+        "mp-form": "/components/weui/form/form"
+    },
+    "component": true
+}

@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-searchbar": "/components/weui/searchbar/searchbar",
+        "navbar": "/pages/template/navbar/navbar"
+    },
+    "navigationBarTitleText": "扫码填报",
+    "navigationStyle": "custom"
+}

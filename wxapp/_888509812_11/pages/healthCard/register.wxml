@@ -1,0 +1,60 @@
+<import src="../../tabbar.wxml"></import>
+<view class="container" style="background-color:{{navbarData.bgcolor}};">
+    <navbar navbarData="{{navbarData}}"></navbar>
+    <view class="scroll-view" style="padding-top:{{statusBarHeight+44}}px">
+        <view class="jkk-top" style="background-color:{{navbarData.bgcolor}};padding-top:{{statusBarHeight/2}}px;height:calc(160rpx + {{screenHeight>=750?statusBarHeight*3:statusBarHeight*3+50}}px);" wx:if="{{yhlx=='student'||yhlx=='teacher'||yhlx=='thirdparty'}}">
+            <view class="jkk-top-img" style="top:{{statusBarHeight/2}}px">
+                <image mode="widthFix" src="{{user_info.avatarUrl?user_info.avatarUrl:'/resources/jkk-'+yhlx+'.png'}}"></image>
+            </view>
+            <view class="jkk-top-item jkk-top-xm">{{base_info.xm}}</view>
+            <view class="jkk-top-item">{{base_info.yhm}}</view>
+            <view class="jkk-top-item" style="line-height:40rpx;">{{base_info.bmmc?base_info.bmmc:''}}{{base_info.yxmc?base_info.yxmc:''}}{{base_info.bjmc?'/'+base_info.bjmc:''}}</view>
+            <view class="jkk-top-item" wx:if="{{yhlx=='student'}}">{{base_info.ssmc}}</view>
+            <view class="jkk-top-img-bottom" style="top:{{statusBarHeight/2}}px">
+                <image src="/resources/jkk-bottom-img.png"></image>
+            </view>
+        </view>
+        <view class="jkk-top" style="background-color:{{navbarData.bgcolor}};height:calc(160rpx + {{screenHeight>=750?statusBarHeight*3:statusBarHeight*3+50}}px);" wx:if="{{yhlx=='visitor'}}">
+            <view class="jkk-top-img" style="top:{{statusBarHeight/2}}px">
+                <image mode="widthFix" src="{{user_info.avatarUrl?user_info.avatarUrl:'/resources/jkk-'+yhlx+'.png'}}"></image>
+            </view>
+            <view class="jkk-top-item jkk-top-xm">{{base_info.xm}}</view>
+            <view class="jkk-top-item">{{base_info.yhm}}</view>
+            <view class="jkk-top-item">{{base_info.id_card}}</view>
+            <view class="jkk-top-img-bottom" style="top:{{statusBarHeight/2}}px">
+                <image src="/resources/jkk-bottom-img.png"></image>
+            </view>
+        </view>
+        <view class="content-box" style="position: relative;;height:calc(100% - 160rpx - {{statusBarHeight*3}}px);">
+            <view class="jkk-content">
+                <view class="jkk-yhlx" style="background-color:{{navbarData.bgcolor}}">{{base_info.yhlx}}</view>
+                <view class="jkk-form">
+                    <view class="jkk-form-title">{{form.ddmc}}</view>
+                    <view class="jkk-form-content">
+                        <view style="padding-bottom:80rpx">
+                            <text class="weui-self-cell-title">进出状态</text>
+                            <view class="weui-self-cell weui-self-cell-radio-checkbox">
+                                <radio-group bindchange="radioChange" class="radio-group">
+                                    <label class="radio" wx:for="{{radioArr}}" wx:key="name">
+                                        <radio checked="{{item.checked}}" color="#3888ff" value="{{item.value}}">
+                                            <text>{{item.name}}</text>
+                                        </radio>
+                                    </label>
+                                </radio-group>
+                            </view>
+                        </view>
+                        <checkbox-group bindchange="zzcnChange" class="checkbox-group">
+                            <label class="checkbox">
+                                <checkbox checked="{{params.zzcn}}" color="#3888FF" value="{{params.zzcn}}"></checkbox>我已阅读本申报所列事项，并保证以上申报内容正确属实
+              </label>
+                        </checkbox-group>
+                    </view>
+                    <view style="padding:16px;">
+                        <button bindtap="funcTJ" class="btn-tj" hoverClass="btn-hover" size="none" type="none">提交</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="tools" src="../../utils/indexOf.wxs" />

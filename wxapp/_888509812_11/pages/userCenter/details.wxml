@@ -1,0 +1,103 @@
+<view class="container">
+    <view class="main-content {{splc_cls=='hide'?'':'margin-bottom-0'}}">
+        <view class="mc-jbxx-wrap">
+            <image class="mcj-sptb" src="/resources/wd_sptg@2x.png" wx:if="{{baseInfo.zt=='通过'}}"></image>
+            <view class="mcj-common">
+                <image binderror="" bindload="" class="mcj-tx" lazyLoad="false" mode="" src="/resources/head-default@2x.png"></image>
+                <view class="mcj-xmjg">
+                    <text class="mcj-xm">{{baseInfo.xm}}提交的{{baseInfo.title}}</text>
+                    <text class="mcj-jg  mcj-jg-sptg" wx:if="{{baseInfo.zt=='通过'}}">审批通过</text>
+                    <text class="mcj-jg  mcj-jg-spbjj" wx:if="{{baseInfo.zt=='拒绝'}}">审批被拒绝</text>
+                    <text class="mcj-jg  mcj-jg-spz" wx:if="{{baseInfo.zt=='审批中'}}">等待审批</text>
+                    <text class="mcj-jg  mcj-jg-spz" wx:if="{{baseInfo.zt=='待审批'}}">待我审批</text>
+                </view>
+            </view>
+            <view class="mcj-xx">
+                <view class="mcj-xx-item">
+                    <text class="mcj-ms">编号：</text>{{baseInfo.approval_id}}</view>
+                <view class="mcj-xx-item">
+                    <text class="mcj-ms">所属组：</text>{{baseInfo.ssz||'-'}}</view>
+                <view class="mcj-xx-item">
+                    <text class="mcj-ms">所属部门：</text>{{baseInfo.ssbm||'-'}}</view>
+            </view>
+        </view>
+        <view class="mc-jkksq-wrap">
+            <text class="mcs-title">{{baseInfo.title}}</text>
+            <view class="mcj-xx">
+                <block wx:for="{{jbxx_all}}" wx:key="key">
+                    <view class="mcj-xx-item" wx:if="{{item.title!=''}}">
+                        <text class="mcj-ms">{{item.title}}</text>
+                    </view>
+                    <view class="mcj-xx-item">
+                        <text class="mcj-ms">{{item.key}}：</text>
+                        <block wx:if="{{item.type!=='image'}}">{{item.value}}</block>
+                        <view class="image-container" wx:else>
+                            <view class="image-item" wx:for="{{item.value}}" wx:for-item="item_image" wx:key="*this">
+                                <image bindtap="previewImage" data-list="{{item.value}}" data-url="{{item_image}}" lazyLoad="{{true}}" mode="aspectFill" src="{{item_image}}"></image>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="mc-splc-wrap">
+            <text class="mcs-title">审批流程</text>
+            <view class="mcs-splc">
+                <block wx:for="{{splc}}" wx:key="multi_names">
+                    <view class="mcs-splc-item {{item.approval_time?'success':''}}" wx:if="{{item.type==='发起申请'}}">
+                        <view class="mcs-icon">
+                            <image binderror="" bindload="" class="mcs-tx" lazyLoad="false" mode="" src="/resources/head-default@2x.png"></image>
+                            <view class="mcs-tx-icon">
+                                <mp-icon color="#00996c" icon="done2" size="16" type="field"></mp-icon>
+                            </view>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-bold">{{item.type}}</text>
+                            <text class="mcs-right">{{item.approval_time}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.name}}</text>
+                        </view>
+                    </view>
+                    <view class="mcs-splc-item {{item.approval_time?'success':''}}" wx:elif="{{item.type==='抄送人'}}">
+                        <view class="mcs-icon">
+                            <mp-icon color="#ffffff" icon="volume-up" size="18" type="field"></mp-icon>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-bold">{{item.type}}</text>
+                            <text class="mcs-right">{{item.approval_time}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.sum}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.multi_names?item.multi_names:item.name}}</text>
+                        </view>
+                    </view>
+                    <view class="mcs-splc-item {{item.approval_time?'success':''}}" wx:else>
+                        <view class="mcs-icon">
+                            <text wx:if="{{item.icon}}">{{item.icon}}</text>
+                            <mp-icon color="#ffffff" icon="group-detail" size="18" type="field" wx:else></mp-icon>
+                            <view class="mcs-tx-icon">
+                                <mp-icon color="#00996c" icon="done2" size="16" type="field" wx:if="{{item.sftg==='同意'}}"></mp-icon>
+                                <mp-icon color="#EC4E4E" icon="close2" size="16" type="field" wx:elif="{{item.sftg==='拒绝'}}"></mp-icon>
+                                <mp-icon color="#EEAB32" icon="more2" size="16" type="field" wx:else></mp-icon>
+                            </view>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left mcs-bold">{{item.type}}</text>
+                            <text class="mcs-right">{{item.approval_time}}</text>
+                        </view>
+                        <view class="mcs-xx">
+                            <text class="mcs-left">{{item.name||item.multi_names}}{{item.sftg?'（'+item.sftg+'）':''}}</text>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="mc-spch-wrap" wx:if="{{splc_cls=='show'}}">
+            <view bindtap="funcDeal" class="refuse" data-params="approval_id={{baseInfo.approval_id}}&branch={{baseInfo.branch}}&type=拒绝&form_id={{baseInfo.form_id}}&username={{baseInfo.yhm}}&xm={{baseInfo.xm}}">拒绝</view>
+            <view bindtap="funcDeal" class="agree" data-params="approval_id={{baseInfo.approval_id}}&branch={{baseInfo.branch}}&type=同意&form_id={{baseInfo.form_id}}&username={{baseInfo.yhm}}&xm={{baseInfo.xm}}">同意</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,68 @@
+<import src="/pages/template/no_record.wxml"></import>
+<mp-toptips msg="{{toptips.msg}}" show="{{toptips.show}}" type="{{toptips.type}}"></mp-toptips>
+<view class="container" hidden="{{xxtx_judge}}" style="{{showDialog?'overflow:hidden':''}}" wx:if="{{form_id}}">
+    <general-form bind:pickerChange="pickerChange" bindComponentAdd="componentAdd" bindComponentDel="componentDel" formInfo="{{form_info}}"></general-form>
+    <view class="weui-self-cell weui-self-cell-inline" hidden="{{pageWait}}" style="font-size:10pt;padding-right:16px;">
+        <checkbox-group bindchange="zzcnChange" class="checkbox-group">
+            <label class="checkbox" style="font-size:12pt;font-weight:600;">
+                <checkbox checked="{{params.zzcn}}" color="#3888ff" value="1"></checkbox>郑重承诺
+        </label>
+        </checkbox-group>
+        <view style="padding:16px;color:#999;">上述信息是我本人或代他人填写，本人对信息内容真实性和完整性负责，因信息填报不实导致相关后果的，本人愿意承担相应的责任。</view>
+    </view>
+    <block wx:if="{{splc_list.length>1}}">
+        <text class="weui-self-cell-title">审批流程</text>
+        <view class="splc-wrap">
+            <view class="splc-item" wx:for="{{splc_list}}" wx:key="index">
+                <view class="splc-left">
+                    <text class="splc-role">{{item.role}}</text>
+                    <text class="splc-count">{{item.desc}}</text>
+                </view>
+                <view class="splc-right">
+                    <view bindtap="funcLookAll" class="splc-spr splc-{{item.mark}}" data-all="{{item.all}}" data-desc="{{item.desc}}" data-mark="{{item.mark}}" wx:if="{{item.all.length>2}}">
+                        <view class="splc-spr-shortname">
+                            <mp-icon color="#fff" icon="group-detail" size="20" type="field"></mp-icon>
+                        </view>
+                        <text class="splc-spr-fullname">查看全部</text>
+                    </view>
+                    <view class="splc-spr splc-{{item.mark}}" wx:for="{{item.who}}" wx:for-item="_item" wx:key="fullname">
+                        <text class="splc-spr-shortname">{{_item.shortname}}</text>
+                        <text class="splc-spr-fullname">{{_item.fullname}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="{{showDialog?'weui-show':'weui-hidden'}}">
+            <view bindtap="closeDialog" class="weui-mask init" data-type="tap"></view>
+            <view class="weui-half-screen-dialog weui-dialog-top">
+                <view class="weui-half-screen-dialog__hd">
+                    <view bindtap="closeDialog" class="weui-half-screen-dialog__hd__side" data-type="close">
+                        <view class="weui-icon-btn weui-icon-btn_close">关闭</view>
+                    </view>
+                </view>
+                <view class="weui-dialog-content">
+                    <view class="look-all-title">{{look_all.desc}}</view>
+                    <view class="splc-spr splc-{{look_all.mark}}" wx:for="{{look_all.all}}" wx:for-item="_item" wx:key="fullname">
+                        <text class="splc-spr-shortname">{{_item.shortname}}</text>
+                        <text class="splc-spr-fullname">{{_item.fullname}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view hidden="{{pageWait}}" style="padding:16px;">
+        <button bindtap="funcTJ" class="btn-tj" hoverClass="btn-hover" size="none" type="none">提交</button>
+    </view>
+</view>
+<view class="container" wx:else>
+    <template is="noRecord" data></template>
+</view>
+<view class="container msg-box" hidden="{{tjcg_judge}}">
+    <view class="icon">
+        <mp-icon color="#20A55A" icon="done2" size="96" type="field"></mp-icon>
+    </view>
+    <view class="type">提交成功</view>
+    <view class="msg">你已经成功提交了你的表单</view>
+    <button bindtap="funcLjjh" class="btn-tj" size="none" type="none">返回</button>
+</view>
+<wxs module="tools" src="../../utils/indexOf.wxs" />

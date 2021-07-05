@@ -1,0 +1,28 @@
+.container {
+    padding: 40rpx;
+    height: auto;
+    background-color: #fff;
+}
+
+.title {
+    text-align: center;
+    font-weight: 700;
+}
+
+.title,.yy {
+    font-size: 30rpx;
+}
+
+.yy {
+    line-height: 60rpx;
+}
+
+.content {
+    font-size: 28rpx;
+    line-height: 48rpx;
+    color: #333;
+}
+
+.content>view {
+    margin-bottom: 10rpx;
+}

@@ -1,0 +1,75 @@
+function indexOf(arr, value) {
+    if (arr.indexOf(value) < 0) {
+        return (false)
+    } else {
+        return (true)
+    }
+};
+
+function indexReturn(arr, value) {
+    var index = null;
+    if (value) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))].id == value) {
+                index = i
+            }
+        }
+    };
+    return (index)
+};
+
+function floor(num) {
+    if (num) {
+        num = Math.floor(num)
+    };
+    return (num)
+};
+
+function substr(val, star, end) {
+    star = undefined === star ? 0 : star;
+    end = undefined === end ? -2 : end;
+    if (val.length == 0 || val == undefined) {
+        return
+    };
+    return (val.slice(star, end))
+};
+
+function splitDate(str, fh) {
+    fh = undefined === fh ? 0 : fh;
+    console.log(str);
+    if (!str) {
+        return
+    } else {
+        var date_arr = str.split(' ');
+        return (date_arr[((nt_1 = (fh), null == nt_1 ? undefined : 'number' === typeof nt_1 ? nt_1 : "" + nt_1))])
+    }
+};
+
+function hiddenPart(str, start, end) {
+    start = undefined === start ? 3 : start;
+    end = undefined === end ? 4 : end;
+    if (str) {
+        var new_str = '';
+        str = str.split("");
+        for (var i = 0; i < str.length; i++) {
+            if (i > (start - 1)) {
+                if (i > str.length - end - 1) {
+                    new_str += str[((nt_2 = (i), null == nt_2 ? undefined : 'number' === typeof nt_2 ? nt_2 : "" + nt_2))]
+                } else {
+                    new_str += '*'
+                }
+            } else {
+                new_str += str[((nt_3 = (i), null == nt_3 ? undefined : 'number' === typeof nt_3 ? nt_3 : "" + nt_3))]
+            }
+        };
+        return (new_str)
+    } else {
+        return
+    }
+};
+module.exports.indexReturn = indexReturn;
+module.exports.indexOf = indexOf;
+module.exports.hiddenPart = hiddenPart;
+module.exports.substr = substr;
+module.exports.splitDate = splitDate;
+module.exports.floor = floor;

@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-uploader": "/components/weui/uploader/uploader",
+        "mp-cells": "/components/weui/cells/cells",
+        "mp-cell": "/components/weui/cell/cell"
+    },
+    "navigationBarTitleText": "确认同意"
+}

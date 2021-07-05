@@ -1,0 +1,60 @@
+<view class="container">
+    <mp-cells extClass="my-cells" title="" wx:if="{{yhlx=='student'}}">
+        <mp-cell>
+            <view>用户名</view>
+            <view slot="footer">{{base_info.yhm}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>姓名</view>
+            <view slot="footer">{{base_info.xm}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>手机号</view>
+            <view slot="footer">{{base_info.telephone}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>所在院系</view>
+            <view slot="footer">{{base_info.yxmc}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>所在专业</view>
+            <view slot="footer">{{base_info.zymc}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>所在年级</view>
+            <view slot="footer">{{base_info.xznj}}级</view>
+        </mp-cell>
+        <mp-cell>
+            <view>所在班级</view>
+            <view slot="footer">{{base_info.bjmc}}</view>
+        </mp-cell>
+    </mp-cells>
+    <mp-cells extClass="my-cells" title="" wx:if="{{yhlx=='teacher'}}">
+        <mp-cell>
+            <view>用户名</view>
+            <view slot="footer">{{base_info.yhm}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>姓名</view>
+            <view slot="footer">{{base_info.xm}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>手机号</view>
+            <view slot="footer">{{base_info.telephone}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>所在部门</view>
+            <view slot="footer">{{base_info.bmmc}}</view>
+        </mp-cell>
+    </mp-cells>
+    <mp-cells extClass="my-cells" title="" wx:if="{{yhlx=='visitor'}}">
+        <mp-cell>
+            <view>手机号</view>
+            <view slot="footer">{{base_info.telephone}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view>姓名</view>
+            <view slot="footer">{{base_info.xm}}</view>
+        </mp-cell>
+    </mp-cells>
+</view>

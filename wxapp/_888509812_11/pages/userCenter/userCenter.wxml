@@ -1,0 +1,40 @@
+<import src="../../tabbar.wxml"></import>
+<view class="container">
+    <navbar navbarData="{{navbarData}}"></navbar>
+    <view class="uc-top" style="margin-top:{{statusBarHeight+44}}px">
+        <image binderror="" bindload="" class="uc-head-bg" lazyLoad="false" mode="" src="/resources/head_bg@2x.png"></image>
+        <view class="uc-info">
+            <image binderror="" bindload="" class="uc-pic" lazyLoad="true" mode="scaleToFill" src="/resources/head-default@2x.png"></image>
+            <view class="uc-name">{{xm}}<text class="uc-name-text">{{yhm}}</text>
+            </view>
+            <navigator class="uc-arrow" openType="navigate" url="/pages/userCenter/setting">
+                <mp-icon color="#ffffff" icon="arrow" size="18" type="field"></mp-icon>
+            </navigator>
+        </view>
+    </view>
+    <scroll-view class="uc-content">
+        <block wx:for="{{my_list}}" wx:for-index="key" wx:for-item="value" wx:key="*this">
+            <block wx:if="{{value.length===0}}"></block>
+            <view class="ucc-item" wx:else>
+                <text class="ucc-title">{{key}}</text>
+                <view class="ucc-content-wrap">
+                    <block wx:for="{{value}}" wx:for-index="_index" wx:for-item="_item" wx:key="name">
+                        <navigator class="ucc-cw-item" hoverClass="none" openType="navigate" url="{{_item.url}}" wx:if="{{_item.url!==''}}">
+                            <view class="icon-group-icon {{_item.iconCls||_item.icon}}">
+                                <image lazyLoad="true" src="/resources/icon-group/{{_item.icon}}.png"></image>
+                            </view>
+                            <text>{{_item.name}}</text>
+                        </navigator>
+                        <view bindtap="funcSys" class="ucc-cw-item" hoverClass="none" wx:else>
+                            <view class="icon-group-icon {{_item.iconCls||_item.icon}}">
+                                <image lazyLoad="true" src="/resources/icon-group/{{_item.icon}}.png"></image>
+                            </view>
+                            <text>{{_item.name}}</text>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+</view>
+<template is="tabBar" data="{{tabBar:tabBar}}"></template>

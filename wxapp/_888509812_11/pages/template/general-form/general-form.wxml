@@ -1,0 +1,123 @@
+<block wx:for="{{formInfo.layouts}}" wx:for-index="_index" wx:for-item="_item" wx:key="_index">
+    <block wx:for="{{_item.widgets}}" wx:for-index="widgets_index" wx:for-item="widgets_item" wx:key="widgets_index">
+        <view class="weui-self-cell-title poR" style="background:white;border-bottom:1px solid #f7f7f7;" wx:if="{{widgets_index%_item.kjsl==0&&_item.is_component}}">{{_item.component_name}}({{tools.floor(widgets_index/_item.kjsl)+1}}) <view bindtap="funcComponentDel" class="del-btn" data-componentid="{{_item.component_id}}" data-delindex="{{widgets_index}}" data-kjsl="{{_item.kjsl}}" wx:if="{{_item.widgets.length>_item.kjsl}}">删除</view>
+        </view>
+        <view class="weui-self-cell" wx:if="{{widgets_item.type=='input'}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <input bindinput="pickerChange" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" placeholder="{{widgets_item.desc}}" type="text" value="{{detail&&tools.indexOf(widgets_item.title,'身份证')?tools.hiddenPart(widgets_item.answer[0],6,4):widgets_item.answer[0]}}"></input>
+        </view>
+        <view class="weui-self-cell" wx:if="{{widgets_item.type=='number'}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <input bindinput="pickerChange" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" placeholder="{{widgets_item.desc}}" type="digit" value="{{detail&&tools.indexOf(widgets_item.title,'手机号')?tools.hiddenPart( widgets_item.answer[0] ):widgets_item.answer[0]}}"></input>
+            <text hidden="{{tools.indexOf(widgets_item.title,'体温')?false:true}}" style="margin-left:20rpx;">℃</text>
+        </view>
+        <view class="weui-self-cell weui-self-cell-picker" wx:if="{{widgets_item.type=='select'&&!widgets_item.region}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <picker bindchange="pickerChange" class="weui-self-picker" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" mode="selector" range="{{widgets_item.zdz}}" rangeKey="text" value="{{tools.indexReturn( widgets_item.zdz,widgets_item.answer[0] )}}">
+                <view class="picker {{!widgets_item.answer[0]?'picker-placeholder':''}}">
+          {{widgets_item.answer[0]?widgets_item.zdz[ tools.indexReturn( widgets_item.zdz,widgets_item.answer[0] ) ].text:widgets_item.desc}}
+        </view>
+            </picker>
+            <mp-icon color="#ccc" extClass="weui-self-icon" icon="arrow" size="12" type="field"></mp-icon>
+        </view>
+        <view class="weui-self-cell weui-self-cell-picker" wx:if="{{widgets_item.type=='select'&&widgets_item.region}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <picker bindchange="pickerChange" class="weui-self-picker" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" mode="region" value="">
+                <view class="picker {{!widgets_item.answer[0]?'picker-placeholder':''}}">
+          {{widgets_item.answer.length?widgets_item.answer:widgets_item.desc}}
+        </view>
+            </picker>
+            <mp-icon color="#ccc" extClass="weui-self-icon" icon="arrow" size="12" type="field"></mp-icon>
+        </view>
+        <view class="weui-self-cell weui-self-cell-picker" wx:if="{{widgets_item.type=='date'}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <picker bindchange="pickerChange" class="weui-self-picker" data-filed="{{widgets_item.widget_id}}" data-time="{{widgets_item.time?'rq':''}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" mode="date" value="{{widgets_item.time?tools.splitDate( widgets_item.answer[0] ):widgets_item.answer[0]}}">
+                <view class="picker {{!widgets_item.answer[0]?'picker-placeholder':''}}">
+                    <block wx:if="{{widgets_item.time}}">
+            {{tools.splitDate( widgets_item.answer[0] )?tools.splitDate( widgets_item.answer[0] ):widgets_item.desc}}
+          </block>
+                    <block wx:else>
+            {{widgets_item.answer[0]?widgets_item.answer[0]:widgets_item.desc}}
+          </block>
+                </view>
+            </picker>
+            <mp-icon color="#ccc" extClass="weui-self-icon" icon="arrow" size="12" type="field"></mp-icon>
+        </view>
+        <view class="weui-self-cell weui-self-cell-picker" wx:if="{{widgets_item.type=='date'&&widgets_item.time}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{tools.substr(widgets_item.title,0,-2)}}时间</text>
+            <picker bindchange="pickerChange" class="weui-self-picker" data-filed="{{widgets_item.widget_id}}" data-time="{{widgets_item.time?'sj':''}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" mode="time" value="{{tools.splitDate(widgets_item.answer[0],1)}}">
+                <view class="picker {{!widgets_item.answer[0]?'picker-placeholder':''}}">
+          {{widgets_item.answer[0]?tools.splitDate(widgets_item.answer[0],1):'请选择时间'}}
+        </view>
+            </picker>
+            <mp-icon color="#ccc" extClass="weui-self-icon" icon="arrow" size="12" type="field"></mp-icon>
+        </view>
+        <view class="weui-self-cell weui-self-cell-picker" wx:if="{{widgets_item.type=='time'}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <picker bindchange="pickerChange" class="weui-self-picker" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" mode="time" value="{{widgets_item.answer[0]}}">
+                <view class="picker {{!widgets_item.answer[0]?'picker-placeholder':''}}">
+          {{widgets_item.answer[0]?widgets_item.answer[0]:widgets_item.desc}}
+        </view>
+            </picker>
+            <mp-icon color="#ccc" extClass="weui-self-icon" icon="arrow" size="12" type="field"></mp-icon>
+        </view>
+        <view class="weui-self-cell weui-self-cell-inline" wx:if="{{widgets_item.type=='multiinput'}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <view class="weui-textarea-wrap">
+                <textarea autoHeight bindinput="pickerChange" class="weui-textarea" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}" disabled="{{detail?true:false}}" maxlength="100" placeholder="{{widgets_item.desc}}" value="{{widgets_item.answer[0]}}"></textarea>
+            </view>
+        </view>
+        <view wx:if="{{widgets_item.type=='radio'}}">
+            <text class="weui-self-cell-title">
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <view class="weui-self-cell weui-self-cell-radio-checkbox">
+                <radio-group bindchange="pickerChange" class="radio-group {{detail?'disabled':''}}" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}">
+                    <label class="radio" wx:for="{{widgets_item.zdz}}" wx:key="text">
+                        <radio checked="{{item.id==widgets_item.answer[0]?'checked':''}}" color="#3888ff" value="{{item.id}}">
+                            <text>{{item.text}}</text>
+                        </radio>
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+        <view wx:if="{{widgets_item.type=='checkbox'}}">
+            <text class="weui-self-cell-title">
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <view class="weui-self-cell weui-self-cell-radio-checkbox">
+                <checkbox-group bindchange="pickerChange" class="checkbox-group {{detail?'disabled':''}}" data-filed="{{widgets_item.widget_id}}" data-widgetsindex="{{widgets_index}}">
+                    <label class="checkbox" wx:for="{{widgets_item.zdz}}" wx:key="text">
+                        <checkbox checked="{{tools.indexOf(widgets_item.answer,item.id)}}" color="#3888ff" value="{{item.id}}">
+                            <text>{{item.text}}</text>
+                        </checkbox>
+                    </label>
+                </checkbox-group>
+            </view>
+        </view>
+        <view class="weui-self-cell weui-self-cell-inline weui-self-cell-image" wx:if="{{widgets_item.type=='image'}}">
+            <text>
+                <text class="must-required" wx:if="{{widgets_item.required}}">*</text>{{widgets_item.title}}</text>
+            <view class="grid">
+                <view class="bg-img" wx:for="{{widgets_item.answer}}" wx:for-index="answer_index" wx:for-item="answer_item" wx:key="*this">
+                    <image bindtap="previewImage" data-filed="{{widgets_item.widget_id}}" data-index="{{answer_index}}" data-url="{{answer_item}}" lazyLoad="{{true}}" mode="aspectFill" src="{{answer_item}}"></image>
+                    <view catchtap="deleteImage" class="icon-clear" data-filed="{{widgets_item.widget_id}}" data-index="{{answer_index}}"></view>
+                </view>
+                <view bindtap="chooseImage" class="solids" data-filed="{{widgets_item.widget_id}}" data-length="{{9-widgets_item.answer.length}}" data-widgetsindex="{{widgets_index}}" wx:if="{{widgets_item.answer.length<9||false}}">
+                    <view class="cuIcon-cameraadd"></view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <button bindtap="funcComponentAdd" class="add-btn" data-componentid="{{_item.component_id}}" data-kjsl="{{_item.kjsl}}" wx:if="{{_item.is_component&&!detail}}">
+        <mp-icon color="#438FFF" icon="add" size="14" type="field"></mp-icon>
+    添加{{_item.component_name}}
+  </button>
+</block>
+<wxs module="tools" src="../../../utils/indexOf.wxs" />

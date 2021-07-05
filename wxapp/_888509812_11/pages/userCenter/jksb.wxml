@@ -1,0 +1,191 @@
+<import src="/pages/template/no_record.wxml"></import>
+<view class="container">
+    <view class="main-nav">
+        <view bindtap="funcNav" class="nav-item {{nav_index===index?'active':''}}" data-index="{{index}}" wx:for="{{nav_list}}" wx:key="*this">
+            <text>{{item}}</text>
+        </view>
+    </view>
+    <view class="main-content" wx:if="{{nav_index===0}}">
+        <view class="mc-tooltips" wx:if="{{!can_submit}}">温馨提示：打卡频率不低于2小时。</view>
+        <view class="mc-top" hidden="{{dksj?true:false}}">
+            <text class="mc-top-normal">最近上报时间：{{sbsj||'-'}}</text>
+            <text class="mc-top-normal">工/学号：{{base_info.yhm}}</text>
+            <text class="mc-top-normal">姓名：{{base_info.xm}}</text>
+            <text class="mc-top-normal">单位：{{base_info.bmmc?base_info.bmmc:''}}{{base_info.xznj?base_info.xznj+'级':''}}{{base_info.yxmc?'/'+base_info.yxmc:''}}{{base_info.zymc?'/'+base_info.zymc:''}}{{base_info.bjmc?'/'+base_info.bjmc:''}}</text>
+        </view>
+        <view class="mc-center {{!can_submit?'ban-events':''}}">
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>联系电话</view>
+                    <view class="mcc-inline" slot="footer">
+                        <input bindinput="bindChange" class="mp-cell-input" data-id="lxdh" disabled="{{dksj?true:false}}" placeholder="请输入联系电话" placeholderClass="input-placeholder" type="number" value="{{params.lxdh}}"></input>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>紧急联系人</view>
+                    <view class="mcc-inline" slot="footer">
+                        <input bindinput="bindChange" class="mp-cell-input" data-id="jjlxr" disabled="{{dksj?true:false}}" placeholder="请输入紧急联系人" placeholderClass="input-placeholder" type="text" value="{{params.jjlxr}}"></input>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>紧急联系电话</view>
+                    <view class="mcc-inline" slot="footer">
+                        <input bindinput="bindChange" class="mp-cell-input" data-id="jjlxdh" disabled="{{dksj?true:false}}" placeholder="请输入紧急联系电话" placeholderClass="input-placeholder" type="number" value="{{params.jjlxdh}}"></input>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>中共党员</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="zgdy">
+                        <label class="radio" wx:for="{{zgdy_list}}" wx:key="name">
+                            <radio checked="{{params.zgdy==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>湖北健康码状态</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="hbjkmzt">
+                        <label class="radio" wx:for="{{hbjkmzt_list}}" wx:key="name">
+                            <radio checked="{{params.hbjkmzt==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell inline="true">
+                    <view>
+                        <text class="must-required">*</text>当前身体状况</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="dqstzk">
+                        <label class="radio" wx:for="{{dqstzk_list}}" wx:key="name">
+                            <radio checked="{{params.dqstzk==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>当前体温</view>
+                    <view class="mcc-inline" slot="footer">
+                        <input bindinput="bindChange" class="mp-cell-input" data-id="dqtw" disabled="{{dksj?true:false}}" maxlength="4" placeholder="请输入当前体温" placeholderClass="input-placeholder" type="digit" value="{{params.dqtw}}"></input>
+                        <text style="margin-left:10px;">℃</text>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>本人是否发热</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="brsffr">
+                        <label class="radio" wx:for="{{brsffr_list}}" wx:key="name">
+                            <radio checked="{{params.brsffr==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>本人是否咳嗽</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="brsfks">
+                        <label class="radio" wx:for="{{brsfks_list}}" wx:key="name">
+                            <radio checked="{{params.brsfks==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>家人是否发热</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="jrsffr">
+                        <label class="radio" wx:for="{{jrsffr_list}}" wx:key="name">
+                            <radio checked="{{params.jrsffr==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>
+                        <text class="must-required">*</text>家人是否咳嗽</view>
+                    <radio-group bindchange="bindChange" class="radio-group {{dksj?'disabled':''}}" data-id="jrsfks">
+                        <label class="radio" wx:for="{{jrsfks_list}}" wx:key="name">
+                            <radio checked="{{params.jrsfks==item.name}}" color="#3888ff" value="{{item.name}}">
+                                <text>{{item.name}}</text>
+                            </radio>
+                        </label>
+                    </radio-group>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell>
+                    <view>详细情况</view>
+                    <view class="mcc-inline" slot="footer">
+                        <input bindinput="bindChange" class="mp-cell-input" data-id="xxqk" disabled="{{dksj?true:false}}" placeholder="请输入详细情况" placeholderClass="input-placeholder" type="text" value="{{params.xxqk}}"></input>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells extClass="my-cells" title="">
+                <mp-cell inline="true">
+                    <view class="mc-title">所在位置<text bindtap="funcRefresh" class="mc-map-refresh">{{map.status?'刷新位置':'开启定位'}}</text>
+                    </view>
+                    <block wx:if="{{map.status}}">
+                        <view class="map-container">
+                            <map showLocation class="map" id="jksbMap" latitude="{{map.poi.latitude}}" longitude="{{map.poi.longitude}}" markers="{{map.markers}}" scale="18"></map>
+                        </view>
+                        <text class="map-position-name">当前位置：{{map.poi.address}}</text>
+                    </block>
+                    <view class="map-container" wx:else>
+                        <view class="mc-tips">
+                            <icon color="#FAC07B" size="16" type="warn"></icon> 未开启位置权限</view>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+        </view>
+        <view class="mc-foot" wx:if="{{can_submit}}">
+            <button bindtap="funcTJ" class="btn-confirm" hoverClass="btn-confirm-hover" loading="{{TJloading}}" size="none" type="none">提交</button>
+        </view>
+    </view>
+    <view class="main-content main-content-record" wx:else>
+        <block wx:if="{{record_list.length}}">
+            <view class="mc-item" wx:for="{{record_list}}" wx:key="id">
+                <view class="mi-row ">体温：<text class="{{item.temperature<37.3||item.temperature=='-'?'success':'error'}}">{{item.temperature}}℃</text>
+                    <text class="mi-time">{{item.report_datetime}}</text>
+                </view>
+                <view class="mi-row">当前身体状况：{{item.health}}</view>
+                <view class="mi-row" wx:if="{{item.jkmzt=='绿色'}}">健康码状态：<text class="success">{{item.jkmzt}}</text>
+                </view>
+                <view class="mi-row" wx:if="{{item.jkmzt=='黄色'}}">健康码状态：<text class="yellow">{{item.jkmzt}}</text>
+                </view>
+                <view class="mi-row" wx:if="{{item.jkmzt=='红色'}}">健康码状态：<text class="error">{{item.jkmzt}}</text>
+                </view>
+                <view class="mi-row">位置：{{item.address}}</view>
+            </view>
+        </block>
+        <template is="noRecord" data wx:else></template>
+    </view>
+</view>

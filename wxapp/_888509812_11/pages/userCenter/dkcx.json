@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-searchbar": "/components/weui/searchbar/searchbar",
+        "mp-loading": "/components/weui/loading/loading"
+    },
+    "navigationBarTitleText": "打卡查询"
+}

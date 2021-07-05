@@ -1,0 +1,48 @@
+{
+    "pages": [
+        "pages/login/login",
+        "pages/login/frgotPassword",
+        "pages/login/privacy",
+        "pages/login/service",
+        "pages/index/jumpOut",
+        "pages/healthCard/healthCard",
+        "pages/healthCard/register",
+        "pages/healthCard/credentials",
+        "pages/healthCard/sbjkxx",
+        "pages/healthCard/sdtb",
+        "pages/userCenter/userCenter",
+        "pages/userCenter/cwjl",
+        "pages/userCenter/cswd",
+        "pages/userCenter/cwddh",
+        "pages/userCenter/wdbd",
+        "pages/userCenter/wfqd",
+        "pages/userCenter/wfqdxq",
+        "pages/userCenter/jksb",
+        "pages/userCenter/baseInfo",
+        "pages/userCenter/setting",
+        "pages/userCenter/changePassword",
+        "pages/userCenter/approval",
+        "pages/userCenter/deal",
+        "pages/userCenter/search",
+        "pages/userCenter/details",
+        "pages/userCenter/fxgl",
+        "pages/guard/index",
+        "pages/guard/search",
+        "pages/guard/detail",
+        "pages/infoNotice/infoNotice",
+        "pages/infoNotice/ggxq",
+        "pages/userCenter/crmx",
+        "pages/userCenter/dkcx",
+        "pages/userCenter/dktj"
+    ],
+    "window": {
+        "backgroundColor": "#eeeeee",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "校园健康管理",
+        "navigationBarTextStyle": "black"
+    },
+    "navigateToMiniProgramAppIdList": [
+        "wx9995d2ac6283d7fa"
+    ]
+}

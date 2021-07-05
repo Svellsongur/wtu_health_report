@@ -1,0 +1,31 @@
+<view class="container">
+    <view class="page__bd clearfix">
+        <mp-searchbar bindDoSearch="funcSearch" bindclear="clearInput" bindinput="searchInput" confirmType="search" placeholder="请输入用户名、姓名" search=""></mp-searchbar>
+    </view>
+    <view class="cwjl-body">
+        <view class="cwjl-content">
+            <view class="cwjl-list" wx:if="{{dataList.length>0}}" wx:for="{{dataList}}" wx:for-item="_dataList">
+                <view class="cwjl-list-content">
+                    <view class="cwjl-rq">
+						{{_dataList.xm}}	{{_dataList.rq}}  {{_dataList.rqxq}}  {{_dataList.sj}}
+						</view>
+                    <view class="cwjl-jl clearfix">
+                        <view class="cwjl-sj">
+							{{_dataList.cwdd}}（{{_dataList.fx}}）
+							</view>
+                        <view class="cwjl-wd {{_dataList.mqtw>=37.3?'error':'success'}}" wx:if="{{_dataList.mqtw}}">
+							{{_dataList.mqtw}}
+							</view>
+                        <view class="cwjl-cw success">
+							{{_dataList.sjly}}测温
+							</view>
+                    </view>
+                </view>
+            </view>
+            <view class="noData-box" wx:if="{{dataList.length<=0}}">
+                <image class="noData" src="/resources/guard-no-record@2x.png"></image>
+                <view>暂无相关记录</view>
+            </view>
+        </view>
+    </view>
+</view>

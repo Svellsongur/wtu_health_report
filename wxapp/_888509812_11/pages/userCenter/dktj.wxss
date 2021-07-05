@@ -1,0 +1,89 @@
+.mct-wrap {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-row-gap: 20rpx;
+    grid-column-gap: 20rpx;
+    padding: 20rpx;
+    background-color: #fff;
+}
+
+.mct-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16rpx;
+    color: #fff;
+    height: 200rpx;
+}
+
+.mcti-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+}
+
+.mcti-number {
+    font-size: 36rpx;
+    font-weight: 700;
+}
+
+.mcti-bg {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mcb-item {
+    margin-top: 20rpx;
+    padding: 20rpx;
+    background-color: #fff;
+}
+
+.mcbi-title image {
+    width: 19rpx;
+    height: 28rpx;
+    margin-right: 10rpx;
+}
+
+.mcbi-content {
+    padding: 20rpx 20rpx 0rpx;
+}
+
+.mcbic-item {
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: column;
+    color: #666;
+    font-size: 26rpx;
+}
+
+.no-item {
+    text-align: center;
+    font-size: 30rpx;
+}
+
+.mcbici-name {
+    width: calc(100% - 100rpx);
+}
+
+.mcbici-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mcbici-value progress {
+    flex: 1;
+}
+
+.mcbici-value text {
+    width: 100rpx;
+    margin-left: 20rpx;
+}

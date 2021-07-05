@@ -1,0 +1,50 @@
+.map_container {
+    height: calc(100vh);
+    width: 100%;
+}
+
+.map {
+    height: 100%;
+    width: 100%;
+}
+
+.list-guide {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.5);
+    top: 0;
+    left: 0;
+}
+
+.list-guide-view {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background: #fff;
+}
+
+.list-guide-imgae {
+    height: 70rpx;
+    width: 70rpx;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.list-guide-text {
+    font-size: 35rpx;
+}
+
+.show {
+    height: 100%;
+}
+
+.hide {
+    height: 0;
+}

@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "mp-icon": "../../components/weui/icon/icon",
+        "navbar": "/pages/template/navbar/navbar"
+    },
+    "navigationBarTitleText": "我的",
+    "navigationStyle": "custom"
+}

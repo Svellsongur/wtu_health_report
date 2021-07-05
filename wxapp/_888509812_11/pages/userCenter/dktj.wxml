@@ -1,0 +1,76 @@
+<view class="container">
+    <view class="main-content">
+        <view class="mc-top">
+            <view class="mct-wrap">
+                <view class="mct-item">
+                    <view class="mcti-text">
+                        <text class="mcti-title">已打卡教职工人数</text>
+                        <text class="mcti-number">{{total.jzg_ydkrs}}</text>
+                    </view>
+                    <image class="mcti-bg" mode="" src="/resources/bg-dktj-yellow@2x.png"></image>
+                </view>
+                <view class="mct-item">
+                    <view class="mcti-text">
+                        <text class="mcti-title">教职工总人数</text>
+                        <text class="mcti-number">{{total.jzg_zrs}}</text>
+                    </view>
+                    <image class="mcti-bg" src="/resources/bg-dktj-blue@2x.png"></image>
+                </view>
+                <view class="mct-item">
+                    <view class="mcti-text">
+                        <text class="mcti-title">已打卡学生人数</text>
+                        <text class="mcti-number">{{total.xs_ydkrs}}</text>
+                    </view>
+                    <image class="mcti-bg" src="/resources/bg-dktj-purple@2x.png"></image>
+                </view>
+                <view class="mct-item">
+                    <view class="mcti-text">
+                        <text class="mcti-title">学生总人数</text>
+                        <text class="mcti-number">{{total.xs_zrs}}</text>
+                    </view>
+                    <image class="mcti-bg" src="/resources/bg-dktj-green@2x.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="mc-bottom">
+            <view class="mcb-wrap">
+                <view class="mcb-item">
+                    <view class="mcbi-title">
+                        <image src="/resources/icon-dktj-li.png"></image>
+                        <text>各单位教职工上报进度</text>
+                    </view>
+                    <view class="mcbi-content">
+                        <block wx:if="{{jzg.length>0}}">
+                            <view class="mcbic-item" wx:for="{{jzg}}" wx:key="name">
+                                <text class="mcbici-name">{{item.name}}</text>
+                                <view class="mcbici-value">
+                                    <progress active activeColor="#3888ff" borderRadius="4" color="#10AEFF" percent="{{item.value}}" strokeWidth="8"></progress>
+                                    <text>{{item.value}}%</text>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="mcbic-item no-item" wx:else>暂无相关数据</view>
+                    </view>
+                </view>
+                <view class="mcb-item">
+                    <view class="mcbi-title">
+                        <image src="/resources/icon-dktj-li.png"></image>
+                        <text>各院部学生上报进度</text>
+                    </view>
+                    <view class="mcbi-content">
+                        <block wx:if="{{xs.length>0}}">
+                            <view class="mcbic-item" wx:for="{{xs}}" wx:key="name">
+                                <text class="mcbici-name">{{item.name}}</text>
+                                <view class="mcbici-value">
+                                    <progress active activeColor="#3888ff" borderRadius="4" color="#10AEFF" percent="{{item.value}}" strokeWidth="8"></progress>
+                                    <text>{{item.value}}%</text>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="mcbic-item no-item" wx:else>暂无相关数据</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

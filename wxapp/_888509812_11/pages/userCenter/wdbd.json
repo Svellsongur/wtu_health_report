@@ -1,0 +1,9 @@
+{
+    "component": true,
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-toptips": "/components/weui/toptips/toptips",
+        "general-form": "/pages/template/general-form/general-form"
+    },
+    "navigationBarTitleText": "我的表单"
+}

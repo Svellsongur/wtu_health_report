@@ -1,0 +1,22 @@
+<mp-toptips msg="{{error}}" show="{{error}}" type="error"></mp-toptips>
+<view class="container" hidden="{{xxtx_judge}}">
+    <general-form bindPickerChange="PickerChange" formInfo="{{form_info}}"></general-form>
+    <view class="weui-self-cell" style="margin-top:16px;font-size:10pt;padding-right:16px;">
+        <checkbox-group bindchange="checkboxChange" class="checkbox-group">
+            <label class="checkbox">
+                <checkbox checked="{{false}}" color="#3888ff" value="{{wyyzbsb}}"></checkbox>我已阅知本申报所列事项，并保证以上申报内容正确属实.
+      </label>
+        </checkbox-group>
+    </view>
+    <view style="padding:16px;">
+        <button bindtap="funcTJ" class="btn-tj" size="none" type="none">提交</button>
+    </view>
+</view>
+<view class="container msg-box" hidden="{{tjcg_judge}}">
+    <view class="icon">
+        <mp-icon color="#20A55A" icon="done2" size="96" type="field"></mp-icon>
+    </view>
+    <view class="type">提交成功</view>
+    <view class="msg">你已经成功提交了你的健康信息</view>
+    <button bindtap="funcLjjh" class="btn-tj" size="none" type="none">立即激活</button>
+</view>

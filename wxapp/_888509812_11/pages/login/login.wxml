@@ -1,0 +1,20 @@
+<image class="login_bg" src="/resources/banner@2x.png"></image>
+<view class="bgWhite" wx:if="{{loginState}}"></view>
+<view class="container">
+    <view class="hearder">
+        <image class="logo" src="/resources/logo@2x.png"></image>
+        <image class="title-img" src="/resources/logo-banner@2x.png"></image>
+    </view>
+    <view class="content">
+        <button bindgetphonenumber="getPhoneNumber" class="login-submit" openType="getPhoneNumber" style="margin-top: 200rpx;">一键登录</button>
+    </view>
+    <view class="privacy">
+        <button bindtap="checkboxChange" class="get-user-info"></button>
+        <checkbox checked="{{privacy}}" class="checkbox" color="#3888ff" value="{{privacy}}"></checkbox>
+    请仔细阅读
+    <text bindtap="funcService">《用户服务协议》</text> 和 <text bindtap="funcPrivacy">《隐私政策》</text>
+    </view>
+    <mp-dialog bindbuttontap="privacyDialog" buttons="{{oneButton}}" show="{{showDialog}}" title="提示">
+        <view>请先仔细阅读用户服务协议和隐私政策，然后勾选用户服务协议和隐私政策</view>
+    </mp-dialog>
+</view>

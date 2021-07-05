@@ -1,0 +1,148 @@
+.container {
+    margin-bottom: 60px;
+    min-height: calc(100% - 60px);
+    overflow: hidden;
+    height: auto;
+}
+
+.uc-top {
+    position: relative;
+    width: 750rpx;
+    height: 230rpx;
+    display: flex;
+    align-items: center;
+    padding-left: 60rpx;
+    padding-right: 60rpx;
+    box-sizing: border-box;
+}
+
+.uc-head-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.uc-info {
+    flex: 1;
+    height: 148rpx;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.uc-pic {
+    width: 148rpx;
+    height: 148rpx;
+    border-radius: 50%;
+}
+
+.uc-name {
+    width: calc(100% - 168rpx);
+    float: left;
+    margin-left: 20rpx;
+    color: #fff;
+    font-size: 36rpx;
+    position: absolute;
+    left: 168rpx;
+    z-index: 0;
+    text-align: left;
+}
+
+.uc-name-text {
+    font-size: 30rpx;
+    display: block;
+}
+
+.uc-arrow {
+    width: calc(100% - 148rpx);
+    text-align: right;
+    height: 120rpx;
+    line-height: 120rpx;
+    position: relative;
+}
+
+.uc-arrow mp-icon {
+    position: absolute;
+    right: 0;
+    top: -5rpx;
+}
+
+.uc-content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.ucc-item {
+    flex: 1;
+    margin-bottom: 32rpx;
+    padding: 32rpx;
+    background-color: #fff;
+}
+
+.ucc-item:last-of-type {
+    margin-bottom: 0;
+}
+
+.ucc-title {
+    font-size: 34rpx;
+    color: #333;
+}
+
+.ucc-cw-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24rpx;
+    color: #333;
+    width: 25%;
+    margin-top: 32rpx;
+    vertical-align: middle;
+}
+
+.ucc-cw-item .icon-group-icon,.ucc-cw-item image {
+    width: 104rpx;
+    height: 104rpx;
+    margin-bottom: 12rpx;
+}
+
+.icon-group-icon {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-group-icon image {
+    width: 65rpx;
+    height: 65rpx;
+    margin-bottom: 0rpx;
+}
+
+.wd_cwddh,.wd_fxsq,[class*=icon-group-blue] {
+    background-color: #3296fa;
+}
+
+.wd_cxsq,[class*=icon-group-green] {
+    background-color: #16bd86;
+}
+
+.wd_crmx,.wd_wfqd,[class*=icon-group-orange] {
+    background-color: #ff933d;
+}
+
+.wd_cwjl,.wd_dkcx {
+    background-color: #00c2ce;
+}
+
+.wd_dktj,.wd_mrjk,.wd_wdsp,[class*=icon-group-yellow] {
+    background-color: #ffac00;
+}
+
+[class*=icon-group-cyan] {
+    background-color: #00b5c5;
+}

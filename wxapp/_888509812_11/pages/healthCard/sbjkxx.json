@@ -1,0 +1,11 @@
+{
+    "component": true,
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-toptips": "/components/weui/toptips/toptips",
+        "mp-checkbox-group": "/components/weui/checkbox-group/checkbox-group",
+        "mp-form": "/components/weui/form/form",
+        "general-form": "/pages/template/general-form/general-form"
+    },
+    "navigationBarTitleText": "上报健康信息"
+}

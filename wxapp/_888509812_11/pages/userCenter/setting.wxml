@@ -1,0 +1,18 @@
+<view class="container">
+    <mp-cells extClass="my-cells" title="">
+        <navigator class="uc-arrow" openType="navigate" url="/pages/userCenter/baseInfo">
+            <mp-cell>
+                <view>个人信息</view>
+                <view slot="footer">
+                    <mp-icon color="#333" icon="arrow" size="12" type="field"></mp-icon>
+                </view>
+            </mp-cell>
+        </navigator>
+    </mp-cells>
+    <mp-cells extClass="my-cells" title=" " wx:if="{{!environment}}">
+        <button bindtap="funcExit" class="login-out" hoverClass="login-out-hover" size="none" style="text-align:center;" type="none">退出登录</button>
+    </mp-cells>
+</view>
+<mp-dialog bindbuttontap="func_dialog_button" buttons="{{dialog_buttons}}" maskClosable="{{false}}" show="{{dialog_show}}" title="">
+    <view>退出登录</view>
+</mp-dialog>

@@ -1,0 +1,12 @@
+{
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon",
+        "mp-cells": "/components/weui/cells/cells",
+        "mp-cell": "/components/weui/cell/cell",
+        "mp-checkbox": "/components/weui/checkbox/checkbox",
+        "mp-checkbox-group": "/components/weui/checkbox-group/checkbox-group",
+        "mp-form": "/components/weui/form/form",
+        "mp-msg": "/components/weui/msg/msg"
+    },
+    "navigationBarTitleText": "健康打卡"
+}

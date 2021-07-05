@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "mp-icon": "/components/weui/icon/icon"
+    },
+    "component": true
+}

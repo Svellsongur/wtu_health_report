@@ -1,0 +1,40 @@
+<import src="/pages/template/no_record.wxml"></import>
+<view class="container">
+    <view class="page__bd clearfix">
+        <mp-searchbar bindDoSearch="funcSearch" bindclear="clearInput" bindinput="inputChange" confirmType="search" placeholder="请输入名称、审批编号"></mp-searchbar>
+        <view bindtap="func_dialog" class="search-Btn">筛选</view>
+    </view>
+    <view class="filter">
+        <view class="{{showDialog?'weui-show':'weui-hidden'}}">
+            <view bindtap="closeDialog" class="weui-mask init" data-type="tap"></view>
+            <view class="weui-half-screen-dialog weui-dialog-top">
+                <view class="weui-dialog-content">
+                    <view class="filter-item" wx:for="{{filter}}" wx:key="name">
+                        <text class="filter-title">{{item.name}}</text>
+                        <view class="filter-content">
+                            <text bindtap="func_filter_active" class="{{_item.cls}}" data-id="{{_item.id}}" data-name="{{item.name}}" wx:for="{{item.value}}" wx:for-item="_item" wx:key="id">{{_item.text}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-half-screen-dialog__ft">
+                    <button bindtap="func_dialog_cancle" class="btn-cancle" hoverClass="btn-cancle-hover" size="none" type="none">取消</button>
+                    <button bindtap="func_dialog_confirm" class="btn-confirm" hoverClass="btn-confirm-hover" size="none" type="none">确认</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main-content" wx:if="{{data.length>0}}">
+        <navigator class="mc-item" url="wfqdxq?spbh={{item.spbh}}&spzt={{item.spzt}}" wx:for="{{data}}" wx:key="spbh">
+            <view class="mc-title">
+                <text class="mc-theme">{{item.title}}</text>
+                <text class="mc-time">{{item.time}}</text>
+            </view>
+            <view class="mc-p">审批编号：{{item.spbh}}</view>
+            <view class="mc-p mc-p-{{item.spzt}}">{{item.spjg}}</view>
+        </navigator>
+    </view>
+    <view class="main-content" wx:else>
+        <template is="noRecord" data></template>
+    </view>
+    <mp-loading extClass="weui-self-loading" show="{{showLoading}}" type="dot-gray"></mp-loading>
+</view>

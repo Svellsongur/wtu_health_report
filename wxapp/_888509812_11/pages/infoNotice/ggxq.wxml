@@ -1,0 +1,13 @@
+<import src="/wxParse/wxParse.wxml"></import>
+<view class="container">
+    <view class="title">
+        <view>{{content.title}}</view>
+        <view class="time">{{content.recv_time}}</view>
+    </view>
+    <view class="content">
+        <view class="offer-detail">
+            <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+        </view>
+        <button bindtap="jump" class="jump {{content.app_jump_url!='-'?'show':''}}" data-url="{{content.app_jump_url}}">跳转链接</button>
+    </view>
+</view>

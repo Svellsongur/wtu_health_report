@@ -1,0 +1,10 @@
+<view class="nav-wrap" style="height: {{height+44}}px;">
+    <view class="nav-title" style="line-height: {{height*2+44}}px;background:{{navbarData.bgcolor}};color:{{navbarData.color}}">{{navbarData.title}}</view>
+    <view style="display: flex; justify-content: space-around;flex-direction: column; position: relative;top:-{{height*2+44}}px">
+        <view class="nav-capsule" style="height: {{height*2+44}}px;" wx:if="{{navbarData.showCapsule}}">
+            <view bindtap="_navback" class="_navback" data-back="{{navbarData.back}}" style="position: relative;top:{{height*2+44}}px" wx:if="{{navbarData.share}}">
+                <mp-icon color="white" icon="back" size="12"></mp-icon>
+            </view>
+        </view>
+    </view>
+</view>

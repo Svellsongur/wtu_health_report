@@ -1,0 +1,42 @@
+<view class="container">
+    <view class="title">
+        <view bindtap="handeSearch" class="{{searchIndex==index?'actived':''}} " data-index="{{index}}" wx:for="{{searchList}}" wx:key="*this">
+            <text>{{item}}</text>
+            <view class="titBorder" wx:if="{{searchIndex==index}}"></view>
+        </view>
+    </view>
+    <view class="page__bd" wx:if="{{searchIndex==0}}">
+        <mp-searchbar bindselectresult="selectResult" placeholder="搜索{{searchList[searchIndex]}}" search="{{search}}" value="{{inputVal}}"></mp-searchbar>
+    </view>
+    <view class="page__bd" wx:if="{{searchIndex==1}}">
+        <mp-searchbar bindinput="input" bindselectresult="selectResult" placeholder="搜索{{searchList[searchIndex]}}" search="{{search}}"></mp-searchbar>
+    </view>
+    <view class="zzjg" wx:if="{{searchIndex==1}}">
+        <view class="zzjg-title">
+            <block wx:for="{{orgArr}}" wx:key="index">
+                <text class="color99" data-id="{{item.id}}" wx:if="{{orgArr.length==1&&index==0}}">{{item.text}}</text>
+                <text class="color99" data-id="{{item.id}}" wx:if="{{orgArr.length>1&&index==orgArr.length-1}}">{{item.text}}</text>
+                <text bindtap="funcOrgBack" class="color38f" data-id="{{item.id}}" wx:if="{{orgArr.length>1&&index<orgArr.length-1}}">{{item.text}}</text>
+                <text class="color99" style="display:inline-block;padding:0 20rpx" wx:if="{{orgArr.length>1&&index<orgArr.length-1}}">></text>
+            </block>
+        </view>
+        <view class="zzjg-body">
+            <view class="zzjg-list" wx:if="{{!orgUser}}" wx:for="{{orgList}}" wx:key="index">
+                <view bindtap="funcZzjg" data-id="{{item.id}}">{{item.text}}</view>
+                <view bindtap="funcNextOrg" data-id="{{item.id}}" data-text="{{item.text}}">
+                    <text class="zzjg-line">|</text>
+                    <view class="mcs-icon">
+                        <mp-icon color="#3988FF" icon="more" size="18" type="field"></mp-icon>
+                    </view>
+                    <text class="zzjg-next">下级</text>
+                </view>
+            </view>
+            <view class="zzjg-list" wx:if="{{orgUser}}" wx:for="{{userList}}" wx:key="index">
+                <view bindtap="funcZzjg" data-id="{{item.id}}">
+                    <text class="zzjg-icon">{{item.name}}</text>
+                    <text>{{item.text}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

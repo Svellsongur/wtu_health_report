@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "mp-dialog": "/components/weui/dialog/dialog",
+        "mp-icon": "/components/weui/icon/icon",
+        "navbar": "/pages/template/navbar/navbar"
+    },
+    "enablePullDownRefresh": true,
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+}

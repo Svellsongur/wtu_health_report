@@ -1,0 +1,223 @@
+.container {
+    background: #fff;
+}
+
+textarea {
+    width: calc(100% - 80rpx);
+    padding: 30rpx 40rpx;
+    height: calc(100% - 660rpx);
+}
+
+.clear {
+    padding-right: 40rpx;
+}
+
+.deal {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 32rpx;
+    font-size: 28rpx;
+    color: #666;
+    border-top: 1px solid #ccc;
+}
+
+.deal .user {
+    padding: 0 20rpx;
+    color: #0080ef;
+}
+
+.submit {
+    border-radius: 48rpx;
+    line-height: 96rpx;
+    font-size: 32rpx;
+    background: #0080ef;
+    color: #fff;
+    margin-top: 35rpx;
+}
+
+.file {
+    width: 100%;
+    padding: 0 16rpx;
+    position: absolute;
+    bottom: 245rpx;
+}
+
+.mcs-tx-icon {
+    display: inline-block;
+    padding: 38rpx 16rpx;
+}
+
+.back {
+    background: #ececec;
+    padding: 20rpx 0;
+}
+
+.back-row {
+    display: flex;
+    background: #fff;
+    padding: 0 40rpx;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 90rpx;
+}
+
+.back-row>view:first-child {
+    flex: 3;
+}
+
+.back-row>view:nth-child(2) {
+    flex: 9;
+    text-align: right;
+}
+
+.icon-box {
+    display: inline-block;
+}
+
+.row-content {
+    color: #666;
+}
+
+.row-icon {
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    position: relative;
+    top: -2rpx;
+    line-height: 60rpx;
+    color: #fff;
+    text-align: center;
+    background: #3888ff;
+    font-size: 22rpx;
+    margin-right: 15rpx;
+    border-radius: 50%;
+}
+
+.back-dilog {
+    z-index: 999;
+}
+
+.back-dilog,.dilog-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.dilog-bg {
+    z-index: 0;
+    background: rgba(0,0,0,.5);
+}
+
+.dilog-body {
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.dilog-title {
+    position: relative;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
+    font-size: 32rpx;
+    line-height: 90rpx;
+    border-bottom: 1px solid #ccc;
+    padding: 0 40rpx;
+}
+
+.dilog-close {
+    position: absolute;
+    padding: 0 10rpx;
+    left: 20rpx;
+    top: -2rpx;
+    display: inline-block;
+}
+
+.dilog-content {
+    padding: 0 30rpx 22rpx;
+}
+
+.list-text {
+    display: inline-block;
+}
+
+.list-text>text {
+    display: block;
+    line-height: 28rpx;
+}
+
+.list-text>text:first-child {
+    color: #333;
+    font-size: 28rpx;
+}
+
+.list-text>text:nth-child(2) {
+    color: #666;
+    font-size: 22rpx;
+}
+
+.dilog-list>.row-icon {
+    width: 64rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    vertical-align: top;
+}
+
+.dilog-list .icon-box {
+    float: right;
+}
+
+.dilog-list {
+    padding-bottom: 30rpx;
+    padding-top: 30rpx;
+    border-bottom: 1px dashed #ccc;
+}
+
+.page__bd {
+    position: absolute;
+    bottom: 245rpx;
+    border: none;
+}
+
+.weui-uploader__files {
+    height: 104rpx;
+}
+
+.weui-uploader__file_status {
+    display: inline-block;
+    width: 96rpx;
+    height: 96rpx;
+    margin-right: 8rpx;
+    margin-bottom: 8rpx;
+}
+
+.weui-uploader__file_status .weui-uploader__img {
+    display: block;
+    width: 96rpx;
+    height: 96rpx;
+}
+
+.weui-uploader__bd .weui-uploader__input-box {
+    margin-right: 8rpx;
+    margin-bottom: 8rpx;
+    width: 96rpx;
+    height: 96rpx;
+    border: none;
+}
+
+.weui-uploader__bd .weui-uploader__input {
+    width: 96rpx;
+    height: 96rpx;
+}
+
+.weui-uploader__info {
+    display: none;
+}
+
+.weui-cells:before {
+    border-top: none;
+}

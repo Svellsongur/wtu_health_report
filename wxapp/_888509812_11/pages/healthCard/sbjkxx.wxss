@@ -1,0 +1,113 @@
+.must-required {
+    color: red;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.weui-self-cell-title {
+    width: 100%;
+    padding: 16px;
+    color: #333;
+    font-weight: 600;
+    font-size: 13pt;
+    box-sizing: border-box;
+}
+
+.weui-self-cell,.weui-self-cell-title {
+    display: flex;
+    align-items: center;
+}
+
+.weui-self-cell {
+    padding: 16px 36px 16px 16px;
+    flex-direction: row;
+    border-bottom: 1px solid #f7f7f7;
+    background-color: #fff;
+    font-size: 12pt;
+    position: relative;
+}
+
+.weui-self-cell input,.weui-self-picker {
+    flex: 1;
+    text-align: right;
+    margin-left: 20rpx;
+}
+
+.weui-self-icon {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.weui-self-cell-inline {
+    flex-direction: column;
+}
+
+.weui-self-cell-inline .weui-self-picker,.weui-self-cell-inline .weui-textarea-wrap,.weui-self-cell-inline text {
+    flex: 1;
+    width: 100%;
+    text-align: left;
+}
+
+.weui-textarea-wrap {
+    position: relative;
+}
+
+.weui-textarea {
+    padding-top: 16px;
+}
+
+.weui-self-cell-radio-checkbox {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.checkbox-group,.radio-group {
+    display: inline-flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.weui-self-cell-radio-checkbox .checkbox,.weui-self-cell-radio-checkbox .radio {
+    flex: 1;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.weui-self-cell-radio-checkbox .checkbox:not(:last-of-type),.weui-self-cell-radio-checkbox .radio:not(:last-of-type) {
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.msg-box {
+    padding: 0 125rpx;
+}
+
+.btn-tj {
+    line-height: 88rpx;
+    color: #fff;
+    background-color: #0080ef;
+    border-radius: 44rpx;
+}
+
+.msg-box .icon {
+    text-align: center;
+}
+
+.msg-box .weui-icon {
+    margin-top: 83rpx;
+    margin-bottom: 62rpx;
+}
+
+.msg-box .msg {
+    text-align: center;
+    font-size: 32rpx;
+    color: #999;
+    margin-top: 36rpx;
+    margin-bottom: 83rpx;
+}
+
+.msg-box .type {
+    text-align: center;
+    font-size: 40rpx;
+    color: #333;
+}

@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "navbar": "/pages/template/navbar/navbar"
+    },
+    "navigationBarTitleText": "信息公告",
+    "navigationStyle": "custom"
+}

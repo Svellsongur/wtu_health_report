@@ -1,0 +1,75 @@
+<import src="/pages/template/no_record.wxml"></import>
+<view class="container">
+    <view class="page__bd clearfix">
+        <mp-searchbar bindDoSearch="funcSearch" bindclear="clearInput" bindinput="inputChange" confirmType="search" placeholder="请输入用户名、姓名"></mp-searchbar>
+        <view bindtap="func_dialog" class="search-Btn">筛选</view>
+    </view>
+    <view class="filter">
+        <view class="{{showDialog?'weui-show':'weui-hidden'}}">
+            <view bindtap="closeDialog" class="weui-mask init" data-type="tap"></view>
+            <view class="weui-half-screen-dialog weui-dialog-top">
+                <view class="weui-dialog-content">
+                    <view class="filter-item">
+                        <text class="filter-title">开始时间</text>
+                        <view class="filter-content">
+                            <picker bindchange="bindTimeChange" data-id="start" end="{{start.time}}" mode="time" start="{{start.time}}" value="{{start.time}}">
+                                <view class="picker-time">
+                  {{start.time?start.time:'请选择开始时间'}}
+                </view>
+                            </picker>
+                        </view>
+                    </view>
+                    <view class="filter-item">
+                        <text class="filter-title">结束时间</text>
+                        <view class="filter-content">
+                            <picker bindchange="bindTimeChange" data-id="end" end="{{end.max}}" mode="time" start="{{end.min}}" value="{{end.time}}">
+                                <view class="picker-time">
+                  {{end.time?end.time:'请选择结束时间'}}
+                </view>
+                            </picker>
+                        </view>
+                    </view>
+                </view>
+                <view class="weui-half-screen-dialog__ft">
+                    <button bindtap="func_dialog_cancle" class="btn-cancle" hoverClass="btn-cancle-hover" size="none" type="none">取消</button>
+                    <button bindtap="func_dialog_confirm" class="btn-confirm" hoverClass="btn-confirm-hover" size="none" type="none">确认</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="main-content">
+        <view class="ul-box">
+            <view class="li-item li-item-1">
+                <view class="li-text li-num">{{static.ydkrs}}</view>
+                <view class="li-text">已打卡</view>
+            </view>
+            <view class="li-item li-item-2">
+                <view class="li-text li-num">{{static.wdkrs}}</view>
+                <view class="li-text">未打卡</view>
+            </view>
+            <view class="li-item li-item-3">
+                <view class="li-text li-num">{{static.ydkzcs}}</view>
+                <view class="li-text">打卡次数</view>
+            </view>
+        </view>
+        <view class="tab-box">
+            <view bindtap="tab_active" class="tab-item {{lxIndex==index?'active':''}}  {{index==lxIndex-1?'no-border':''}}" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}" wx:for="{{tad_lx}}" wx:key="id">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="main-content" wx:if="{{data.length>0}}">
+        <view class="mc-item" wx:for="{{data}}" wx:key="yhm">
+            <view>
+                <view class="mc-title">
+                    <text class="mc-theme">{{item.xm}}（{{item.lx}}）</text>
+                    <text class="mc-p-right {{item.report_time?'':'mc-p-wfk'}}">{{item.report_time?item.report_time:'未打卡'}}</text>
+                </view>
+                <view class="mc-p">{{item.yhm}}</view>
+                <view class="mc-p">{{item.zzjg}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="main-content" wx:else>
+        <template is="noRecord" data></template>
+    </view>
+    <mp-loading extClass="weui-self-loading" show="{{showLoading}}" type="dot-gray"></mp-loading>
+</view>
